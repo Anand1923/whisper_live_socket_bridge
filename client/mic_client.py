@@ -48,7 +48,7 @@ class AudioClient:
             if self.websocket:
                 audio = (indata * 32767).astype(np.int16)
                 asyncio.run_coroutine_threadsafe(
-                    self.send_audio(x),
+                    self.send_audio(audio),
                     self.loop
                 )
         except Exception as e:
@@ -66,7 +66,7 @@ class AudioClient:
                 data = json.loads(message)
                 print(f"Response: {data['text']}")
         except websockets.exceptions.ConnectionClosed:
-            print("🔌 Connection closed by server")
+            print("Connection closed by server")
         except Exception as e:
             print(f"Receive error: {e}")
 
